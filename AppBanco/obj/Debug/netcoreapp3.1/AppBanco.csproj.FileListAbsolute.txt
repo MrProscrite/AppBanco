@@ -1,0 +1,13 @@
+C:\Users\Lucas\Desktop\CarreiraUnica\AppBanco\AppBanco\bin\Debug\netcoreapp3.1\AppBanco.exe
+C:\Users\Lucas\Desktop\CarreiraUnica\AppBanco\AppBanco\bin\Debug\netcoreapp3.1\AppBanco.deps.json
+C:\Users\Lucas\Desktop\CarreiraUnica\AppBanco\AppBanco\bin\Debug\netcoreapp3.1\AppBanco.runtimeconfig.json
+C:\Users\Lucas\Desktop\CarreiraUnica\AppBanco\AppBanco\bin\Debug\netcoreapp3.1\AppBanco.runtimeconfig.dev.json
+C:\Users\Lucas\Desktop\CarreiraUnica\AppBanco\AppBanco\bin\Debug\netcoreapp3.1\AppBanco.dll
+C:\Users\Lucas\Desktop\CarreiraUnica\AppBanco\AppBanco\bin\Debug\netcoreapp3.1\AppBanco.pdb
+C:\Users\Lucas\Desktop\CarreiraUnica\AppBanco\AppBanco\obj\Debug\netcoreapp3.1\AppBanco.csprojAssemblyReference.cache
+C:\Users\Lucas\Desktop\CarreiraUnica\AppBanco\AppBanco\obj\Debug\netcoreapp3.1\AppBanco.AssemblyInfoInputs.cache
+C:\Users\Lucas\Desktop\CarreiraUnica\AppBanco\AppBanco\obj\Debug\netcoreapp3.1\AppBanco.AssemblyInfo.cs
+C:\Users\Lucas\Desktop\CarreiraUnica\AppBanco\AppBanco\obj\Debug\netcoreapp3.1\AppBanco.csproj.CoreCompileInputs.cache
+C:\Users\Lucas\Desktop\CarreiraUnica\AppBanco\AppBanco\obj\Debug\netcoreapp3.1\AppBanco.dll
+C:\Users\Lucas\Desktop\CarreiraUnica\AppBanco\AppBanco\obj\Debug\netcoreapp3.1\AppBanco.pdb
+C:\Users\Lucas\Desktop\CarreiraUnica\AppBanco\AppBanco\obj\Debug\netcoreapp3.1\AppBanco.genruntimeconfig.cache
