@@ -6,22 +6,26 @@ namespace AppBanco
 {
     public class ContaInvestimento : Conta
     {
-        public string TipoInvestimento { get; set; }
+        public TipoInvestimento TipoInvestimento { get; set; }
         public int IdCarteira { get; set; }
-        public string PerfilInvestidor { get; set; }
+        public PerfilInvestidor PerfilInvestidor { get; set; }
+        public List<string> PerfilTeste { get; set; }
     }
 
-    /*public enum TipoInvestimento
+    public enum TipoInvestimento
     {
         RendaVariavel = 1,
         RendaFixa = 2,
-        Previdencia = 3
+        Previdencia = 3,
+        Definir = 4
     }
 
     public enum PerfilInvestidor
     {
         Conservador = 1,
         Moderado = 2,
-        Agressivo = 3
-    }*/
+        Agressivo = 3,
+        Definir = 4
+    }
+
 }

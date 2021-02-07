@@ -6,7 +6,7 @@ namespace AppBanco
 {
     public class ContaInvestimentoService
     {
-        public void DadosContaInvestimento(AppBanco.ContaInvestimento containvestimento)
+        public void DadosContaInvestimento(ContaInvestimento containvestimento)
         {
             Console.WriteLine();
             Console.WriteLine("Aqui estão os dados da sua Conta Investimento:");
@@ -24,86 +24,84 @@ namespace AppBanco
             Console.Clear();
         }
 
-        public void EscolherTipoInvestimento(AppBanco.ContaInvestimento containvestimento)
+        public void EscolherTipoInvestimento(ContaInvestimento containvestimento)
         {
             Console.WriteLine();
             Console.WriteLine($"Seu tipo de investimento atual é {containvestimento.TipoInvestimento}");
             System.Threading.Thread.Sleep(2000);
-            EscolhaTipoInvestimento(containvestimento);
-            System.Threading.Thread.Sleep(2000);
-            Console.Clear();
-        }
-
-        public void EscolherPerfilInvestidor(AppBanco.ContaInvestimento containvestimento)
-        {
-            Console.WriteLine();
-            Console.WriteLine($"Seu perfil investidor atual é {containvestimento.PerfilInvestidor}");
-            System.Threading.Thread.Sleep(2000);
-            EscolhaPerfilInvestidor(containvestimento);
-            System.Threading.Thread.Sleep(2000);
-            Console.Clear();
-        }
-
-        private void EscolhaTipoInvestimento(AppBanco.ContaInvestimento containvestimento)
-        {
             Console.WriteLine("Escolha o seu tipo de investimento" + "\n");
             Console.WriteLine("1 - Renda variável");
             Console.WriteLine("2 - Renda fixa");
             Console.WriteLine("3 - Previdência");
-            var TipoInvestimento = Console.ReadLine();
-            
-            if (TipoInvestimento == "1")
-            {
-                containvestimento.TipoInvestimento = "Renda Variável";
-            }
-            else if (TipoInvestimento == "2")
-            {
-                containvestimento.TipoInvestimento = "Renda Fixa";
-            }
-            else if (TipoInvestimento == "3")
-            {
-                containvestimento.TipoInvestimento = "Previdência.";
-            }
-
-            else
-            {
-                Console.WriteLine("Escolha uma opção válida");
-                System.Threading.Thread.Sleep(2000);
-                EscolhaTipoInvestimento(containvestimento);
-            }
-
+            var escolha = Console.ReadLine();
+            EscolhaTipoInvestimento(containvestimento, escolha);
             Console.WriteLine($"Seu tipo de investimento agora é: {containvestimento.TipoInvestimento}");
+            System.Threading.Thread.Sleep(2000);
+            Console.Clear();
         }
 
-        private void EscolhaPerfilInvestidor(AppBanco.ContaInvestimento containvestimento)
+        public void EscolherPerfilInvestidor(ContaInvestimento containvestimento)
         {
+            Console.WriteLine();
+            Console.WriteLine($"Seu perfil investidor atual é {containvestimento.PerfilInvestidor}");
+            System.Threading.Thread.Sleep(2000);
             Console.WriteLine("Escolha o seu perfil de investidor" + "\n");
             Console.WriteLine("1 - Conservador");
             Console.WriteLine("2 - Moderado");
             Console.WriteLine("3 - Agressivo");
-            var PerfilInvestidor = Console.ReadLine();
+            var escolha = Console.ReadLine();
+            EscolhaPerfilInvestidor(containvestimento, escolha);
+            Console.WriteLine($"Seu perfil investidor atual é: {containvestimento.PerfilInvestidor}");
+            System.Threading.Thread.Sleep(2000);
+            Console.Clear();
+        }
 
-            if (PerfilInvestidor == "1")
+        private void EscolhaTipoInvestimento(ContaInvestimento containvestimento, string escolha)
+        {           
+            if (escolha == "1")
             {
-                containvestimento.PerfilInvestidor = "Conservador";
+                containvestimento.TipoInvestimento = TipoInvestimento.RendaVariavel;
             }
-            else if (PerfilInvestidor == "2")
+            else if (escolha == "2")
             {
-                containvestimento.PerfilInvestidor = "Moderador";
+                containvestimento.TipoInvestimento = TipoInvestimento.RendaFixa;
             }
-            else if (PerfilInvestidor == "3")
+            else if (escolha == "3")
             {
-                containvestimento.PerfilInvestidor = "Agressivo";
+                containvestimento.TipoInvestimento = TipoInvestimento.Previdencia;
             }
 
             else
             {
                 Console.WriteLine("Escolha uma opção válida");
                 System.Threading.Thread.Sleep(2000);
-                EscolhaPerfilInvestidor(containvestimento);
+                EscolhaTipoInvestimento(containvestimento, escolha);
             }
 
-            Console.WriteLine($"Seu perfil investidor atual é: {containvestimento.PerfilInvestidor}");
+        }
+
+        private void EscolhaPerfilInvestidor(ContaInvestimento containvestimento, string escolha)
+        { 
+            if (escolha == "1")
+            {
+                containvestimento.PerfilInvestidor = PerfilInvestidor.Conservador;
+            }
+            else if (escolha == "2")
+            {
+                containvestimento.PerfilInvestidor = PerfilInvestidor.Moderado;
+            }
+            else if (escolha == "3")
+            {
+                containvestimento.PerfilInvestidor = PerfilInvestidor.Agressivo;
+            }
+
+            else
+            {
+                Console.WriteLine("Escolha uma opção válida");
+                System.Threading.Thread.Sleep(2000);
+                EscolhaPerfilInvestidor(containvestimento, escolha);
+            }
+
         }
 
     }

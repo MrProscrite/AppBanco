@@ -6,42 +6,44 @@ namespace AppBanco
 {
     public class ContaCorrenteService
     {
-        public void OperacaoSaque(AppBanco.ContaCorrente conta)
+        public void OperacaoSaque(ContaCorrente conta)
         {
             Console.WriteLine();
             Console.WriteLine("Informe um valor que deseja sacar: " + "\n");
-
-            Sacar(conta);
-            Console.WriteLine($"Seu novo saldo é: {conta.Saldo}.");
+            var valor = Convert.ToDouble(Console.ReadLine());
+            Sacar(conta, valor);
+            Console.WriteLine($"Seu saldo atual é: {conta.Saldo}.");
             System.Threading.Thread.Sleep(2000);
             Console.Clear();
 
         }
 
-        public void OperacaoDeposito(AppBanco.ContaCorrente conta)
+        public void OperacaoDeposito(ContaCorrente conta)
         {
             Console.WriteLine();
             Console.WriteLine("Informe um valor que deseja depositar: " + "\n");
-
-            Depositar(conta);
-            Console.WriteLine($"Seu novo saldo é: {conta.Saldo}.");
+            var valor = Convert.ToDouble(Console.ReadLine());
+            Depositar(conta, valor);
+            Console.WriteLine($"Seu saldo atual é: {conta.Saldo}.");
             System.Threading.Thread.Sleep(2000);
             Console.Clear();
 
         }
 
-        public void OperacaoTransferencia(AppBanco.ContaCorrente conta)
+        public void OperacaoTransferencia(ContaCorrente conta)
         {
             Console.WriteLine();
 
-            Transferir(conta);
-            Console.WriteLine($"Seu novo saldo é: {conta.Saldo}.");
+            Console.WriteLine("Informe um valor que deseja transferir: " + "\n");
+            var valor = Convert.ToDouble(Console.ReadLine());
+            Transferir(conta, valor);
+            Console.WriteLine($"Seu saldo atual é: {conta.Saldo}.");
             System.Threading.Thread.Sleep(2000);
             Console.Clear();
 
         }
 
-        public void DadosContaCorrente(AppBanco.ContaCorrente conta)
+        public void DadosContaCorrente(ContaCorrente conta)
         {
             Console.WriteLine();
             Console.WriteLine("Aqui estão os dados da sua Conta Corrente:");
@@ -58,38 +60,27 @@ namespace AppBanco
         }
 
 
-        private void Sacar(AppBanco.ContaCorrente conta)
+        private void Sacar(ContaCorrente conta, double valor)
         {
-            var Saque = Console.ReadLine();
-            double SaqueConvertido = Convert.ToDouble(Saque);
-            double Valor = SaqueConvertido;
-            if (conta.Saldo < Valor)
+            if (conta.Saldo < valor)
             {
                 Console.WriteLine("Não foi possível realizar o saque pois seu saldo é insuficiente.");
             }
 
-            if (conta.Saldo >= Valor)
+            else if(conta.Saldo >= valor)
             {
-                conta.Saldo -= Valor;
+                conta.Saldo -= valor;
             }
         }
 
-        private void Depositar(AppBanco.ContaCorrente conta)
+        private void Depositar(ContaCorrente conta, double valor)
         {
-            var Deposito = Console.ReadLine();
-            double DepositoConvertido = Convert.ToDouble(Deposito);
-            double Valor = DepositoConvertido;
-            conta.Saldo += Valor;
+            conta.Saldo += valor;
         }
 
-        private void Transferir(AppBanco.ContaCorrente conta)
+        private void Transferir(ContaCorrente conta, double valor)
         {
-            Console.WriteLine("Informe um valor que deseja transferir: " + "\n");
-            var Transferencia = Console.ReadLine();
-            double TransferenciaConvertida = Convert.ToDouble(Transferencia);
-            double Valor = TransferenciaConvertida;
-
-            if (conta.Saldo >= Valor) 
+            if (conta.Saldo >= valor) 
             {
                 Console.WriteLine("Qual método você deseja transferir?" + "\n");
                 Console.WriteLine("1 - TED");
@@ -130,7 +121,7 @@ namespace AppBanco
                     string PrimeiraLetraCDT = ConfirmarDadosTED.Substring(0, 1);
                     if (PrimeiraLetraCDT == "s")
                     {
-                        conta.Saldo -= Valor;
+                        conta.Saldo -= valor;
                         Console.WriteLine($"Transferência para {contaTED.Titular} agendada com sucesso!");
                         Console.WriteLine("Deseja emitir comprovante?" + "\n");
                         var EmitirComprovante = Console.ReadLine();
@@ -149,14 +140,16 @@ namespace AppBanco
                             Console.WriteLine($"CPF: {contaTED.CPF}");
                             Console.WriteLine($"Número da conta: {contaTED.Numero}" + "-" + $"{contaTED.Agencia}");
                             Console.WriteLine($"Banco: {contaTED.Banco}");
-                            Console.WriteLine($"Valor da transferência: {Valor}.");
+                            Console.WriteLine($"Valor da transferência: {valor}.");
                         }
 
                         else { }
                     }
                     else
                     {
-                        Transferir(conta);
+                        Console.WriteLine("Transferência cancelada.");
+                        System.Threading.Thread.Sleep(2000);
+                        Transferir(conta, valor);
                     }
                 };
 
@@ -173,16 +166,16 @@ namespace AppBanco
                     var MensagemPIX = Console.ReadLine();
                     Console.WriteLine("===== Dados da Transferência =====");
                     Console.WriteLine($"Para: {contaPIX.ChavePix}.");
-                    Console.WriteLine($"Valor: {Valor}");
+                    Console.WriteLine($"Valor: {valor}");
                     Console.WriteLine($"Mensagem: {MensagemPIX}");
                     Console.WriteLine("Os dados conferem?" + "\n");
                     var ConfirmarDadosPIX = Console.ReadLine();
                     ConfirmarDadosPIX = ConfirmarDadosPIX.ToLower();
                     string PrimeiraLetraCDP = ConfirmarDadosPIX.Substring(0, 1);
                     
-                    if(ConfirmarDadosPIX == "s")
+                    if(PrimeiraLetraCDP == "s")
                     {
-                        conta.Saldo -= Valor;
+                        conta.Saldo -= valor;
                         Console.WriteLine("Transferência feita com sucesso!");
                         Console.WriteLine("Deseja emitir comprovante?" + "\n");
                         var EmitirComprovante = Console.ReadLine();
@@ -195,23 +188,30 @@ namespace AppBanco
                             Console.WriteLine($"{conta.ChavePix}");
                             Console.WriteLine("Para:");
                             Console.WriteLine($"{contaPIX.ChavePix}");
-                            Console.WriteLine($"Valor da transferência: {Valor}.");
+                            Console.WriteLine($"Valor da transferência: {valor}.");
                             Console.WriteLine($"Mensagem: {MensagemPIX}");
                         }
                         
-                        else { }
+                        else 
+                        {
+                            Console.WriteLine("Transferência cancelada.");
+                            System.Threading.Thread.Sleep(2000);
+                            Transferir(conta, valor);
+                        }
 
                     }
 
                     else
                     {
-                        Transferir(conta);
+                        Console.WriteLine("Transferência cancelada.");
+                        System.Threading.Thread.Sleep(2000);
+                        Transferir(conta, valor);
                     }
 
                 }
             }
 
-            if(conta.Saldo < Valor)
+            if(conta.Saldo < valor)
             {
                 Console.WriteLine("Não foi possível realizar a transferência pois seu saldo é insuficiente.");
             }

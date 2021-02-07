@@ -1,51 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AppBanco
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static void Main(string[] args, ContaCorrente conta, ContaInvestimento containvestimento)
         {
-            Console.WriteLine("Bem-vindo ao app do banco genérico! Escreva seu nome abaixo." + "\n");
-            var nome = Console.ReadLine();
-            Console.WriteLine("Agora o seu sobrenome" + "\n");
-            var sobrenome = Console.ReadLine();
-            Console.WriteLine("Pedimos que digite seu CPF agora. (apenas números): " + "\n");
-            var CPF = Convert.ToInt64(Console.ReadLine());
-            Console.WriteLine("Por fim, pedimos o seu e-mail: " + "\n");
-            var Email = Console.ReadLine();
-            Console.WriteLine($"Muito bem, {nome}! Como é sua primeira vez, vou gerar sua conta!");
-            Random GerarNumeroConta = new Random();
-            int NumeroConta = GerarNumeroConta.Next(10000, 99999);
-            Random GerarIdCarteira = new Random();
-            int IdCarteira = GerarIdCarteira.Next(10000, 99999);
-            ContaCorrente conta = new ContaCorrente()
-            {
-                Agencia = 1,
-                Banco = "Banco Genérico",
-                ChavePix = "pixgenerico@pix.com",
-                Numero = NumeroConta,
-                Titular = nome + ' ' + sobrenome,
-                Saldo = 0,
-                Email = Email,
-                CPF = CPF
-            };
-
-            ContaInvestimento containvestimento = new ContaInvestimento()
-            {
-                Agencia = 1,
-                Banco = "Banco Genério",
-                CPF = CPF,
-                Email = Email,
-                IdCarteira = IdCarteira,
-                Numero = NumeroConta,
-                Saldo = 0,
-                Titular = nome + ' ' + sobrenome,
-                PerfilInvestidor = "Indefinido.",
-                TipoInvestimento = "Indefinido."
-            };
-
-
+            Start();
             new ContaCorrenteService().DadosContaCorrente(conta);
             new ContaInvestimentoService().DadosContaInvestimento(containvestimento);
             Console.WriteLine("Agora você está cadastrado!");
@@ -56,7 +18,7 @@ namespace AppBanco
 
         }
 
-        private static void menu(AppBanco.ContaCorrente conta, AppBanco.ContaInvestimento containvestimento)
+        private static void menu(ContaCorrente conta, ContaInvestimento containvestimento)
         {
             Console.WriteLine("Escolha uma das opções abaixo: ");
             Console.WriteLine("1 - Depósito");
@@ -74,7 +36,7 @@ namespace AppBanco
                     new ContaCorrenteService().OperacaoDeposito(conta);
                     menu(conta, containvestimento);
                     break;
-                
+
                 case '2':
                     new ContaCorrenteService().OperacaoSaque(conta);
                     menu(conta, containvestimento);
@@ -100,9 +62,49 @@ namespace AppBanco
                     new ContaInvestimentoService().DadosContaInvestimento(containvestimento);
                     menu(conta, containvestimento);
                     break;
-
             }
+        }
 
+        public static void Start()
+        {
+            Console.WriteLine("Bem-vindo ao app do banco genérico! Escreva seu nome abaixo." + "\n");
+            var nome = Console.ReadLine();
+            Console.WriteLine("Agora o seu sobrenome" + "\n");
+            var sobrenome = Console.ReadLine();
+            Console.WriteLine("Pedimos que digite seu CPF agora. (apenas números): " + "\n");
+            var CPF = Convert.ToInt64(Console.ReadLine());
+            Console.WriteLine("Por fim, pedimos o seu e-mail: " + "\n");
+            var Email = Console.ReadLine();
+            Console.WriteLine($"Muito bem, {nome}! Como é sua primeira vez, vou gerar sua conta!");
+            Random GerarNumeroConta = new Random();
+            int NumeroConta = GerarNumeroConta.Next(10000, 99999);
+            Random GerarIdCarteira = new Random();
+            int IdCarteira = GerarIdCarteira.Next(10000, 99999);
+            ContaCorrente conta = new ContaCorrente()
+            {
+                Agencia = 1,
+                Banco = " Banco Genérico",
+                ChavePix = "pixgenerico@pix.com",
+                Numero = NumeroConta,
+                Titular = nome + ' ' + sobrenome,
+                Saldo = 0,
+                Email = Email,
+                CPF = CPF
+            };
+
+            ContaInvestimento containvestimento = new ContaInvestimento()
+            {
+                Agencia = 1,
+                Banco = " Banco Genério",
+                CPF = CPF,
+                Email = Email,
+                IdCarteira = IdCarteira,
+                Numero = NumeroConta,
+                Saldo = 0,
+                Titular = nome + ' ' + sobrenome,
+                PerfilInvestidor = PerfilInvestidor.Definir,
+                TipoInvestimento = TipoInvestimento.Definir
+            };
         }
     }
 }
